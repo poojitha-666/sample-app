@@ -1,8 +1,16 @@
-FROM python:3.9-slim
+# Use lightweight Python base
+FROM python:3.11-slim
 
+# Set workdir
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
 
-COPY . .
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy app
+COPY app.py .
+
+# Run
 CMD ["python", "app.py"]
+
